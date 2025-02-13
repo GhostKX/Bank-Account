@@ -1,0 +1,4 @@
+.venv
+.idea
+.DS_Store
+bank_users_details.db
