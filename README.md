@@ -1,35 +1,43 @@
-# Student Database Management System
+# Bank Account Management System
 
-A Python-based **command-line application** for managing student records using SQLite. This system allows users to **add, search, update, delete, and display** student records efficiently.
+A **Python-based command-line application** for managing bank accounts using **SQLite**. This system allows users to **register accounts, make deposits, withdraw funds, check balances, calculate interest, and manage account details** efficiently.
 
 ## Features
 
-- **Student Management**:
-  - Add new students with name, age, and grade.
-  - Search students by first or last name.
-  - Update student grades.
-  - Delete student records.
-  - Display all current students in the system.
+### **Account Management**
+- **Create a new bank account** with personal details (name, phone number, email, username).
+- **Unique usernames** to ensure data integrity.
+- **View account details** including balance.
+- **Edit account information** such as name, phone number, email, and username.
+- **Delete accounts** permanently.
 
-- **Database Integration**:
-  - Uses **SQLite** to store and manage student records.
-  - Data persistence ensures no loss of records upon program exit.
+### **Financial Transactions**
+- **Deposit funds** into an account.
+- **Withdraw funds** with balance verification.
+- **View account balance** at any time.
+- **Interest Calculation** based on different timeframes (12, 24, and 36 months with 1% interest rate).
 
-- **User-Friendly Interface**:
-  - An interactive command-line menu for easy navigation.
+### **Database Integration**
+- Uses **SQLite** for persistent data storage.
+- Ensures secure and reliable transaction handling.
+- Prevents duplicate usernames and invalid data entries.
+
+### **User-Friendly Interface**
+- Interactive **command-line menu** for easy navigation.
+- Input validation for **security and data accuracy**.
 
 ## Requirements
 
-- **Python 3.x** or higher.  
-- **SQLite** (built-in with Python).  
-- No external libraries required.  
+- **Python 3.x** or higher  
+- **SQLite** (built-in with Python)  
+- No external libraries required  
 
 ## How to Run
 
 1. Clone or download this repository to your local machine.
 2. Open your terminal or command prompt.
 3. Navigate to the directory where the script is located.
-4. Run the script with the following command below:
+4. Run the script using:
 
 ```bash
 python PythonBankAccount.py
@@ -39,73 +47,86 @@ python PythonBankAccount.py
 
 The system provides the following options:
 
-- **Add Student**: Enter first name, last name, age, and grade to add a new student.  
-- **Search Student**: Find a student by first or last name.  
-- **View All Students**: Display a list of all students in the database.  
-- **Update Student Grade**: Modify a student’s grade using their ID or first name.  
-- **Delete Student**: Remove a student from the database.  
-- **Exit**: Close the program.  
+- **Create Account** – Register a new user with unique credentials.
+- **Deposit Money** – Add funds to an account.
+- **Withdraw Money** – Withdraw funds from an account (subject to sufficient balance).
+- **View Balance** – Check the current balance of an account.
+- **Calculate Interest** – Simulate interest earnings over different time periods.
+- **Search Accounts** – Find users based on name or phone number.
+- **Edit Account Details** – Update user information.
+- **Delete Account** – Remove an account from the system.
+- **Exit** – Close the program.
 
 
-## Example
+
+## Example Usage Scenario
 ```
-**************************************************
-Welcome to the Student Database Management System!
+**********************************************
+Welcome to the Bank Account Management System!
 
 Choose an option:
-1 - Add a new student
-2 - Search for a student
-3 - View all students
-4 - Edit a student's grade
-5 - Delete a student
-6 - Exit
+1 - Create an account
+2 - Make a deposit
+3 - Withdraw funds
+4 - View balance
+5 - Calculate interest
+6 - Search for an account
+7 - Manage account details
+8 - Exit
 ::: 1
 
-Enter Student Details:
+Enter Your Details:
 First Name: John
 Last Name: Doe
-Age: 20
-Grade: 85.5
+Phone Number: (+998) 123456789
+Email Address: johndoe@email.com
+Username: johndoe123
 
-Student successfully added!
-------------------------------------------------
-List of Students:
--------------------------------------
-ID      First Name     Last Name    Age   Grade
--------------------------------------
-1       John          Doe          20    85.5    
--------------------------------------
-Total students: 1.
-
-------------------------------------------------
+Account successfully created!
+--------------------------------
+Username: johndoe123
+Balance: $0.00
+--------------------------------
 ```
 
-## Code Structure  
+## Code Structure
 
-### Student Database Management  
+### Database Schema
 
-- Student records are managed in an **SQLite database** table called `students`, where entries can be added, removed, updated, or displayed.  
-- The database schema includes:  
-  - **id** (Primary Key) – Auto-incremented student ID.  
-  - **first_name** – Student’s first name.  
-  - **last_name** – Student’s last name.  
-  - **age** – Student’s age.  
-  - **grade** – Student’s academic grade.  
+The system manages account details in an SQLite database table named `user_details`, which stores:
 
-### Class & Function Implementation  
+- **id** (Primary Key) – Auto-incremented account ID.
+- **first_name** – Account holder's first name.
+- **last_name** – Account holder's last name.
+- **phone_number** – Contact number.
+- **email_address** – Registered email.
+- **username** – Unique username.
+- **balance** – Current account balance.
 
-The system is implemented using **functions** to handle student operations:  
+### Core Functions
 
-- **`add_student()`** – Adds a new student after validating input.  
-- **`get_student_by_name()`** – Searches for students by first or last name.  
-- **`show_all_students()`** – Displays all students in the database.  
-- **`update_student_grade()`** – Updates a student's grade using their name or ID.  
-- **`delete_student()`** – Deletes a student record based on name or ID.  
+The system consists of well-structured functions to handle banking operations:
 
-Each function interacts with the SQLite database to ensure **data consistency and persistence**.  
+- **`registration_client()`** – Creates a new user account.
+- **`make_deposit(username)`** – Deposits funds into an account.
+- **`withdraw(username)`** – Withdraws funds after verifying the balance.
+- **`get_username(username)`** – Retrieves account details.
+- **`update_balance(username, new_balance)`** – Updates and stores the new balance.
+- **`calculate()`** – Computes potential interest earnings.
+- **`search(first_name, last_name, phone_number)`** – Searches for accounts by name or phone number.
+- **`show_account(username)`** – Displays account details.
+- **`edit_account()`** – Updates user details such as name, phone number, email, or username.
+- **`delete_account(username)`** – Removes an account permanently.
+
+## Security & Validation
+
+- **Username uniqueness check** prevents duplicate accounts.
+- **Email format validation** ensures valid entries.
+- **Phone number verification** requires proper formatting.
+- **Sufficient funds check** prevents overdrafts on withdrawals.
 
 
 ## Author
 
 - Developed by **GhostKX**
-- GitHub: **[GhostKX](https://github.com/GhostKX/School-Management-Database)**
+- GitHub: **[GhostKX](https://github.com/GhostKX/Bank-Account**
