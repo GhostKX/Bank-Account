@@ -1,9 +1,11 @@
 # Python Bank Account
 import sqlite3
 
+# Establish database connection
 connection = sqlite3.connect('bank_users_details.db')
 sql = connection.cursor()
 
+# Create user_details table if not exists
 sql.execute('''CREATE TABLE IF NOT EXISTS user_details (
             Id integer PRIMARY KEY AUTOINCREMENT,
             first_name TEXT NOT NULL,
@@ -16,6 +18,7 @@ sql.execute('''CREATE TABLE IF NOT EXISTS user_details (
 connection.commit()
 
 
+# Function to register client
 def registration_client():
     print('-' * 35)
     print('\nType in:')
@@ -49,7 +52,7 @@ def registration_client():
     else:
         print('\nError invalid symbols!')
 
-
+# Function to validate email format
 def email_address_check(email_address):
     email_address_valid = '@' in email_address \
                           and '.' in email_address.split('@')[-1] \
@@ -62,11 +65,13 @@ def email_address_check(email_address):
     return email_address_valid
 
 
+# Function to check username existence
 def checking_existing_username(username):
     sql.execute('SELECT * FROM user_details WHERE username = ?', (username,))
     return sql.fetchone()
 
 
+# Function to get user's username
 def get_username(username):
     sql.execute('SELECT * FROM user_details WHERE username = ?', (username,))
     user_profile = sql.fetchone()
@@ -84,6 +89,7 @@ def get_username(username):
     return None
 
 
+# Function to update user's balance
 def update_balance(username, new_balance):
     sql.execute('UPDATE user_details SET balance = ? WHERE username = ?', (new_balance, username,))
     print(f'Account: {username}\n'
@@ -91,6 +97,7 @@ def update_balance(username, new_balance):
     connection.commit()
 
 
+# Function to make a deposit
 def make_deposit(username):
     user_profile = get_username(username)
     if user_profile:
@@ -111,6 +118,7 @@ def make_deposit(username):
         print('\nError invalid username!')
 
 
+# Function to withdraw
 def withdraw(username):
     user_profile = get_username(username)
     if user_profile:
@@ -134,6 +142,7 @@ def withdraw(username):
         print('\nError invalid username!')
 
 
+# Function to calculate
 def calculate():
     print('^' * 35)
     print('\nInterest types\n')
@@ -179,12 +188,14 @@ def calculate():
         return
 
 
+# Function to search user by first name, last name and phone number
 def search(first_name, last_name, phone_number):
     sql.execute('SELECT * FROM user_details WHERE first_name = ? or last_name= ? or phone_number= ?', (first_name, last_name, phone_number))
     user_profiles = sql.fetchall()
     return user_profiles
 
 
+# Function to show account details
 def show_account(username):
     account = get_username(username)
     if account:
@@ -203,6 +214,7 @@ def show_account(username):
         return
 
 
+# Function to edit account details
 def edit_account():
     editing_types = input('\n1. Edit firstname\n'
                           '2. Edit lastname\n'
@@ -293,6 +305,7 @@ def edit_account():
         return
 
 
+# Function to delete user account
 def delete_account(username):
     if get_username(username):
         sql.execute('DELETE FROM user_details WHERE username = ?', (username,))
@@ -307,6 +320,7 @@ def delete_account(username):
         return
 
 
+# Function to show user's profile
 def account_profile():
     account_settings = input('\n1. View account\n'
                              '2. Edit account\n'
@@ -326,6 +340,7 @@ def account_profile():
         return
 
 
+# Main menu
 while True:
     print()
     print('*' * 35)
