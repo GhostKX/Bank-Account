@@ -129,4 +129,4 @@ The system consists of well-structured functions to handle banking operations:
 ## Author
 
 - Developed by **GhostKX**
-- GitHub: **[GhostKX](https://github.com/GhostKX/Bank-Account**
+- GitHub: **[GhostKX](https://github.com/GhostKX/Bank-Account)**
